@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	ckafka "github.com/confluentinc/confluent-kafka-go"
+	ckafka "github.com/confluentinc/confluent-kafka-go/kafka"
 )
 
 func NewKafkaProducer() *ckafka.Producer {

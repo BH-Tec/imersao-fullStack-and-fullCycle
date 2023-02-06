@@ -6,9 +6,9 @@ import (
 	"os"
 	"time"
 
+	ckafka "github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/BH-Tec/imersao-fullStack-and-fullCycle/application/route"
 	"github.com/BH-Tec/imersao-fullStack-and-fullCycle/infra/kafka"
-	ckafka "github.com/confluentinc/confluent-kafka-go"
 )
 
 // {"clientId":"1", "routeId":"1"}
@@ -17,9 +17,8 @@ import (
 func Produce(msg *ckafka.Message) {
 	producer := kafka.NewKafkaProducer()
 	route := route.NewRoute()
-
 	json.Unmarshal(msg.Value, &route)
-	route.LoadPosition()
+	route.LoadPositions()
 	positions, err := route.ExportJsonPositions()
 	if err != nil {
 		log.Println(err.Error())
